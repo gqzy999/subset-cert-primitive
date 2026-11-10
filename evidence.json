@@ -1,0 +1,195 @@
+{
+  "network": "Stable Studionet",
+  "chainId": 61999,
+  "rpcUrl": "https://studio.genlayer.com/api",
+  "contractAddress": "0x4f930a5138B7414AFb599D82D5f83e70d3703BbB",
+  "deployTxHash": "0xa92c0c8ef0ee6dc5cb7eba16d4972c85898f05f06f6d7d99abdd178c643913cd",
+  "contractFile": "contracts/subset_cert.py",
+  "contractSha256": "931afb69a053f6ee051ead467a1425e1e5e81156b2d8b0aaff2b3467af796e8d",
+  "deployedCodeSha256": "931afb69a053f6ee051ead467a1425e1e5e81156b2d8b0aaff2b3467af796e8d",
+  "deployedCodeMatchesSource": true,
+  "accounts": {
+    "creator": "0xAc8Baf0529087a33f3834220683e3A558A760e06"
+  },
+  "cases": [
+    {
+      "id": "C-OK-01",
+      "a": [
+        "read",
+        "write"
+      ],
+      "b": [
+        "read",
+        "write",
+        "admin"
+      ],
+      "expected_membership": [
+        true,
+        true
+      ],
+      "expected_verdict": "SUBSET_OK",
+      "expected_witness": null
+    },
+    {
+      "id": "C-BAD-01",
+      "a": [
+        "read",
+        "write"
+      ],
+      "b": [
+        "read",
+        "write",
+        "admin"
+      ],
+      "expected_membership": [
+        true,
+        true
+      ],
+      "expected_verdict": "SUBSET_OK",
+      "expected_witness": null,
+      "bad_claim": {
+        "claimed_membership": [
+          true,
+          false
+        ],
+        "claimed_verdict": "SUBSET_OK",
+        "error": "MEMBERSHIP_MISMATCH"
+      },
+      "record_expected": false
+    },
+    {
+      "id": "C-NOT-01",
+      "a": [
+        "read",
+        "delete"
+      ],
+      "b": [
+        "read",
+        "write",
+        "admin"
+      ],
+      "expected_membership": [
+        true,
+        false
+      ],
+      "expected_verdict": "NOT_SUBSET",
+      "expected_witness": {
+        "index": 1,
+        "item": "delete"
+      }
+    }
+  ],
+  "transactions": [
+    {
+      "label": "create-C-OK-01-good",
+      "method": "create_case",
+      "args": [
+        "C-OK-01",
+        "[\"read\",\"write\"]",
+        "[\"read\",\"write\",\"admin\"]",
+        "[true,true]",
+        "SUBSET_OK"
+      ],
+      "sender": "0xAc8Baf0529087a33f3834220683e3A558A760e06",
+      "value_wei": "0",
+      "txHash": "0xa5151c009a85364dbf541e8cb83f583833197d175e88d5409d9e20d3bc6fa832",
+      "receiptStatus": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "stderr_excerpt": "{\"a\":[\"read\",\"write\"],\"b\":[\"read\",\"write\",\"admin\"],\"creator\":\"0xac8baf0529087a33f3834220683e3a558a760e06\",\"id\":\"C-OK-01\",\"membership\":[true,true],\"state\":\"DECIDED\",\"verdict\":\"SUBSET_OK\",\"witness\":null}"
+    },
+    {
+      "label": "create-C-BAD-01-bad-claim",
+      "method": "create_case",
+      "args": [
+        "C-BAD-01",
+        "[\"read\",\"write\"]",
+        "[\"read\",\"write\",\"admin\"]",
+        "[true,false]",
+        "SUBSET_OK"
+      ],
+      "sender": "0xAc8Baf0529087a33f3834220683e3A558A760e06",
+      "value_wei": "0",
+      "txHash": "0x30d88e3dc888cf699fffa7ea5954d6f8a1a1fd16cc75c41cd2a7d9f533a865e9",
+      "receiptStatus": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "ERROR",
+      "expected_error": "MEMBERSHIP_MISMATCH",
+      "stderr_excerpt": "EXPECTED: MEMBERSHIP_MISMATCH"
+    },
+    {
+      "label": "create-C-NOT-01-good",
+      "method": "create_case",
+      "args": [
+        "C-NOT-01",
+        "[\"read\",\"delete\"]",
+        "[\"read\",\"write\",\"admin\"]",
+        "[true,false]",
+        "NOT_SUBSET"
+      ],
+      "sender": "0xAc8Baf0529087a33f3834220683e3A558A760e06",
+      "value_wei": "0",
+      "txHash": "0x68cc95af8c7485c0057d4149640c2a5f321d528fcabb744d9f2d44ca174bb190",
+      "receiptStatus": "FINALIZED",
+      "consensus": "MAJORITY_AGREE",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "stderr_excerpt": "{\"a\":[\"read\",\"delete\"],\"b\":[\"read\",\"write\",\"admin\"],\"creator\":\"0xac8baf0529087a33f3834220683e3a558a760e06\",\"id\":\"C-NOT-01\",\"membership\":[true,false],\"state\":\"DECIDED\",\"verdict\":\"NOT_SUBSET\",\"witness\":{\"index\":1,\"item\":\"delete\"}}"
+    }
+  ],
+  "finalReadbacks": {
+    "cases": [
+      {
+        "a": [
+          "read",
+          "write"
+        ],
+        "b": [
+          "read",
+          "write",
+          "admin"
+        ],
+        "creator": "0xac8baf0529087a33f3834220683e3a558a760e06",
+        "id": "C-OK-01",
+        "membership": [
+          true,
+          true
+        ],
+        "state": "DECIDED",
+        "verdict": "SUBSET_OK",
+        "witness": null
+      },
+      {
+        "a": [
+          "read",
+          "delete"
+        ],
+        "b": [
+          "read",
+          "write",
+          "admin"
+        ],
+        "creator": "0xac8baf0529087a33f3834220683e3a558a760e06",
+        "id": "C-NOT-01",
+        "membership": [
+          true,
+          false
+        ],
+        "state": "DECIDED",
+        "verdict": "NOT_SUBSET",
+        "witness": {
+          "index": 1,
+          "item": "delete"
+        }
+      }
+    ],
+    "stats": {
+      "not_subset": 1,
+      "subset_ok": 1,
+      "total": 2
+    },
+    "readBackAt": "2026-11-10T17:44:20.395Z"
+  },
+  "generatedAt": "2026-11-10T17:44:20.395Z"
+}

@@ -5,10 +5,10 @@
 SubsetCert is a deterministic subset certificate primitive: it certifies whether a set A (a list of strings) is a subset of a set B (a list of strings) — every element of A is a member of B. The verdict is fixed by the full per-element membership vector.
 
 - Network: Stable Studionet, Chain ID 61999, RPC https://studio.genlayer.com/api
-- Contract: `TBD`
-- Explorer: https://explorer-studio.genlayer.com/address/TBD
+- Contract: `0x4f930a5138B7414AFb599D82D5f83e70d3703BbB`
+- Explorer: https://explorer-studio.genlayer.com/address/0x4f930a5138B7414AFb599D82D5f83e70d3703BbB
 - Source: `contracts/subset_cert.py`
-- Source SHA-256: `TBD`
+- Source SHA-256: `931afb69a053f6ee051ead467a1425e1e5e81156b2d8b0aaff2b3467af796e8d`
 - Deployed code matches the source byte for byte (checked with `gen_getContractCode`).
 
 ## Mechanism / 机制
@@ -99,10 +99,10 @@ All transactions FINALIZED with MAJORITY_AGREE consensus. Full machine-readable 
 
 | Case | Transaction | Result |
 | --- | --- | --- |
-| Deploy | `TBD` | FINALIZED, contract `TBD` |
-| C-OK-01 A ["read","write"], B ["read","write","admin"] | `TBD` | FINALIZED / SUCCESS — membership [true, true], verdict SUBSET_OK, witness null |
-| C-BAD-01 same sets, last membership entry flipped to False | `TBD` | FINALIZED / ERROR `MEMBERSHIP_MISMATCH` — the flipped claim was rejected; no record created |
-| C-NOT-01 A ["read","delete"], B ["read","write","admin"] | `TBD` | FINALIZED / SUCCESS — membership [true, false], verdict NOT_SUBSET, witness {index: 1, item: "delete"} |
+| Deploy | `0xa92c0c8ef0ee6dc5cb7eba16d4972c85898f05f06f6d7d99abdd178c643913cd` | FINALIZED, contract `0x4f930a5138B7414AFb599D82D5f83e70d3703BbB` |
+| C-OK-01 A ["read","write"], B ["read","write","admin"] | `0xa5151c009a85364dbf541e8cb83f583833197d175e88d5409d9e20d3bc6fa832` | FINALIZED / SUCCESS — membership [true, true], verdict SUBSET_OK, witness null |
+| C-BAD-01 same sets, last membership entry flipped to False | `0x30d88e3dc888cf699fffa7ea5954d6f8a1a1fd16cc75c41cd2a7d9f533a865e9` | FINALIZED / ERROR `MEMBERSHIP_MISMATCH` — the flipped claim was rejected; no record created |
+| C-NOT-01 A ["read","delete"], B ["read","write","admin"] | `0x68cc95af8c7485c0057d4149640c2a5f321d528fcabb744d9f2d44ca174bb190` | FINALIZED / SUCCESS — membership [true, false], verdict NOT_SUBSET, witness {index: 1, item: "delete"} |
 
 Final stats read back live: total 2 — subset_ok 1, not_subset 1.
 
